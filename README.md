@@ -1,5 +1,9 @@
-R3 Boilerplate
+Authy
 ========
+
+## About
+
+This is a boilerplate code to set up authorization using React hooks and context
 
 Development
 ---
