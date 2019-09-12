@@ -24,7 +24,8 @@ module.exports = {
   },
   'plugins': [
     'babel',
-    'react'
+    'react',
+    "react-hooks"
   ],
   'rules': {
     // Never put spaces in opening/closing brackets of arrays
@@ -200,6 +201,8 @@ module.exports = {
         ]
       }
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     // Requires semi-colons to end off statements
     'semi': [
       2, 'always'

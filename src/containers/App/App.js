@@ -6,12 +6,8 @@ import Routes from 'router/Routes';
 import NavBar from 'router/NavBar';
 
 const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 10px auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
+  height: 100vh;
+  background: #222;
 `;
 
 const App = () => {

@@ -5,12 +5,16 @@ import styled from 'styled-components';
 const NavBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 20px;
 `
 
 const AuthWrapper = styled.div`
   display: flex;
-  flex-flow: column;
+  justify-content: space-between;
+  width: 200px;
 `
+
+const authModalInitialState = false
 
 const NavBar = () => {
   return (

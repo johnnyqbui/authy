@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js'
+    filename: '[name].[hash].js'
   },
   module: {
     rules: [
@@ -34,6 +34,7 @@ module.exports = {
     port: 3000,
     publicPath: '/',
     historyApiFallback: { index: '/' },
+    hot: true
   },
   plugins: [
     new HtmlWebpackPlugin({

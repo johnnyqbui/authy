@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   html,
   body {
+    margin: 0;
     height: 100%;
     width: 100%;
   }
@@ -12,15 +13,19 @@ const GlobalStyle = createGlobalStyle`
   body.fontLoaded {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  #app {
-    background-color: #fff;
-    min-height: 100%;
-    min-width: 100%;
-  }
+  h1,
   p,
+  a,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
     line-height: 1.5em;
+    color: #989898;
+  }
+
+  a {
+    font-size: 24px;
+    text-decoration: none;
+    padding: 5px;
   }
 `;
 
