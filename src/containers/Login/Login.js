@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Link } from '@reach/router'
+
 import LoginForm from './components/LoginForm'
 import { H1 } from 'components'
-import styled from 'styled-components'
 
 const Wrapper = styled.div`
     display: flex;
@@ -15,6 +17,12 @@ const Wrapper = styled.div`
     justify-content: center;
     height: 450px;
     box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+    position: relative;
+`
+
+const DontHaveAccount = styled.span`
+  position: absolute;
+  bottom: 16px;
 `
 
 export default () => {
@@ -22,6 +30,12 @@ export default () => {
     <Wrapper>
       <H1>Log In</H1>
       <LoginForm />
+      <DontHaveAccount>
+        {"Don't have an account?"}
+        <Link to='../signup' style={{ fontSize: '16px' }}>
+          Sign up here
+        </Link>
+      </DontHaveAccount>
     </Wrapper>
   );
 }

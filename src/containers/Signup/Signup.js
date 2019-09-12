@@ -1,7 +1,9 @@
 import React from 'react'
+import styled from 'styled-components'
+import { Link } from '@reach/router'
+
 import SignupForm from './components/SignupForm'
 import { H1 } from 'components'
-import styled from 'styled-components'
 
 const Wrapper = styled.div`
     display: flex;

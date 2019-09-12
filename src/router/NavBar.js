@@ -21,8 +21,8 @@ const NavBar = () => {
     <NavBarWrapper>
       <Link to='/'>Home</Link>
       <AuthWrapper>
-        <Link to="/signup">Sign up</Link>
-        <Link to="/login">Log in</Link>
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Log In</Link>
       </AuthWrapper>
     </NavBarWrapper>
   )
