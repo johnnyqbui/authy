@@ -1,29 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Field } from 'components/Form'
 import SubmitButton from 'components/Form/SubmitButton'
-
-const onChange = (e, setValue) => {
-  const newValue = {
-    [e.target.name]: e.target.value
-  }
-
-  setValue(newValue)
-}
-
-const onSubmit = (e) => {
-  console.log('submit')
-  e.preventDefault()
-}
+import axios from 'axios';
 
 const formInitialState = {
   username: '',
   password: '',
-  email: ''
+}
+
+const userInitialState = {
+  user: {}
 }
 
 export default () => {
-  const [value, setValue] = useState(formInitialState)
-  const { username, password } = value;
+  const [values, setValue] = useState(formInitialState)
+
+  const { username, password } = values;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const newValue = {
+      ...values,
+      [name]: value
+    }
+
+    setValue(newValue)
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault()
+
+    console.log('submit', values)
+    // Log user in
+
+    try {
+      const results = await axios.post('localhost:3001')
+      const data = await results.json()
+      console.log({ data })
+
+    } catch {
+      return console.error(e)
+    }
+
+  }
 
   return (
     <Form>
@@ -32,16 +51,16 @@ export default () => {
         placeholder='Username'
         type='text'
         value={username}
-        onChange={(e) => onChange(e, setValue)}
+        onChange={handleInputChange}
       />
       <Field
         name='password'
         placeholder='Password'
         type='password'
         value={password}
-        onChange={(e) => onChange(e, setValue)}
+        onChange={handleInputChange}
       />
-      <SubmitButton onClick={onSubmit} />
+      <SubmitButton onClick={handleFormSubmit} />
     </Form>
   );
 }

@@ -2,19 +2,6 @@ import React, { useState } from 'react'
 import { Form, Field } from 'components/Form'
 import SubmitButton from 'components/Form/SubmitButton'
 
-const onChange = (e, setValue) => {
-  const newValue = {
-    [e.target.name]: e.target.value
-  }
-
-  setValue(newValue)
-}
-
-const onSubmit = (e) => {
-  console.log('submit')
-  e.preventDefault()
-}
-
 const formInitialState = {
   username: '',
   password: '',
@@ -22,12 +9,24 @@ const formInitialState = {
 }
 
 export default () => {
-  const [value, setValue] = useState(formInitialState)
-  const {
-    username,
-    password,
-    email
-  } = value;
+  const [values, setValue] = useState(formInitialState)
+  const { username, password, email } = values;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const newValue = {
+      ...values,
+      [name]: value
+    }
+
+    setValue(newValue)
+  }
+
+  const handleFormSubmit = (e) => {
+    console.log('submit', values)
+
+    e.preventDefault()
+  }
 
   return (
     <Form>
@@ -36,23 +35,23 @@ export default () => {
         placeholder='Username'
         type='text'
         value={username}
-        onChange={(e) => onChange(e, setValue)}
+        onChange={handleInputChange}
       />
       <Field
         name='password'
         placeholder='Password'
         type='password'
         value={password}
-        onChange={(e) => onChange(e, setValue)}
+        onChange={handleInputChange}
       />
       <Field
         name='email'
         placeholder='Email'
         type='email'
         value={email}
-        onChange={(e) => onChange(e, setValue)}
+        onChange={handleInputChange}
       />
-      <SubmitButton onClick={onSubmit} />
+      <SubmitButton onClick={handleFormSubmit} />
     </Form>
   );
 }

@@ -14,8 +14,6 @@ const AuthWrapper = styled.div`
   width: 200px;
 `
 
-const authModalInitialState = false
-
 const NavBar = () => {
   return (
     <NavBarWrapper>
