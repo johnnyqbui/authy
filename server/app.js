@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 
   if (token) {
     req.token = token
+    next()
   } else {
     res.status(403).send({
       error: 'Please provide an Authorization header to identify yourself (can be whatever you want)'
@@ -32,7 +33,15 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.send(`hello, if you're here, Your access has been granted`)
+
+  res.status(200).send(`hello, if you're here, Your access has been granted`)
+});
+
+app.get('/login', (req, res) => {
+
+  res.status(200).send({
+    message: `hello, if you're here, Your access has been granted`
+  })
 });
 
 server.listen(port, () => {

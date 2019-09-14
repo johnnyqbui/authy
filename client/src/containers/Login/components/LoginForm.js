@@ -34,14 +34,20 @@ export default () => {
     // Log user in
 
     try {
-      const results = await axios.get('http://localhost:3001/')
-      const data = await results.json()
-      console.log({ data })
+      const results = await axios({
+        url: 'http://localhost:3001/login',
+        method: 'get',
+        headers: {
+          Authorization: 'someToken',
+          "Content-Type": "application/json"
+        }
+      })
+      const { data } = results
+      console.log({ results, data })
 
     } catch {
       return console.error(e)
     }
-
   }
 
   return (
