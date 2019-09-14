@@ -2,12 +2,15 @@ import http from 'http';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const hostname = 'localhost';
 const port = 3001;
 const app = express()
-// setup express application
 const server = http.createServer(app);
+
+// to enable cors
+app.use(cors())
 
 // log requests to the console
 app.use(logger('dev'));
@@ -17,7 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  console.log({ req, res })
   const token = req.get('Authorization')
 
   if (token) {
@@ -30,14 +32,9 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.send(`hello`)
+  res.send(`hello, if you're here, Your access has been granted`)
 });
 
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the default API route',
-}));
-
-
-server.listen(() => {
+server.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });

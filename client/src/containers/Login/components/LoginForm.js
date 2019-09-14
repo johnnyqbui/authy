@@ -34,7 +34,7 @@ export default () => {
     // Log user in
 
     try {
-      const results = await axios.post('localhost:3001')
+      const results = await axios.get('http://localhost:3001/')
       const data = await results.json()
       console.log({ data })
 

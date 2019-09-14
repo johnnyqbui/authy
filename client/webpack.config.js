@@ -35,12 +35,6 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: { index: '/' },
     hot: true,
-    proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:3001',
-        pathRewrite: { '^/api': '' }
-      }
-    }
   },
   plugins: [
     new HtmlWebpackPlugin({
