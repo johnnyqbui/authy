@@ -3,11 +3,15 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import db from './db/db';
 
 const hostname = 'localhost';
 const port = 3001;
 const app = express()
 const server = http.createServer(app);
+
+// secure headers
+app.use(helmet())
 
 // to enable cors
 app.use(cors())
@@ -33,12 +37,10 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-
   res.status(200).send(`hello, if you're here, Your access has been granted`)
 });
 
 app.get('/login', (req, res) => {
-
   res.status(200).send({
     message: `hello, if you're here, Your access has been granted`
   })
