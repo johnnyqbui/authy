@@ -4,8 +4,7 @@ module.exports = {
     'node': true,
     'es6': true
   },
-  'extends': ['eslint:recommended', 'plugin:react/recommended'
-  ],
+  'extends': ['eslint:recommended', 'plugin:react/recommended'],
   'globals': {
     'window': true,
     'document': true,
@@ -38,9 +37,8 @@ module.exports = {
     ],
     'babel/new-cap': 0,
     'babel/object-curly-spacing': [
-      2, 'never'
+      2, 'always'
     ],
-    // Don't use object shorthand (To be consistent with other languages)
     'babel/object-shorthand': 0,
     'block-scoped-var': 2,
     'block-spacing': [
@@ -205,7 +203,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     // Requires semi-colons to end off statements
     'semi': [
-      2, 'always'
+      2, 'never'
     ],
     'spaced-comment': [
       2, 'always'

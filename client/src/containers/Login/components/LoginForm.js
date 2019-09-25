@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Field } from 'components/Form'
 import SubmitButton from 'components/Form/SubmitButton'
-import axios from 'axios';
+import axios from 'axios'
 
 const formInitialState = {
   username: '',
   password: '',
 }
 
-const userInitialState = {
-  user: {}
-}
-
-export default () => {
+export const LoginForm = () => {
   const [values, setValue] = useState(formInitialState)
 
-  const { username, password } = values;
+  const { username, password } = values
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     const newValue = {
       ...values,
       [name]: value
@@ -34,13 +30,14 @@ export default () => {
     // Log user in
 
     try {
-      const results = await axios({
-        url: 'http://localhost:3001/login',
-        method: 'get',
+      const results = await fetch('http://localhost:3001/login', {
+        method: 'POST',
         headers: {
-          Authorization: 'someToken',
-          "Content-Type": "application/json"
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userInput: values
+        })
       })
       const { data } = results
       console.log({ results, data })
@@ -68,5 +65,5 @@ export default () => {
       />
       <SubmitButton onClick={handleFormSubmit} />
     </Form>
-  );
+  )
 }

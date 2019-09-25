@@ -20,22 +20,24 @@ const Wrapper = styled.div`
     position: relative;
 `
 
-const DontHaveAccount = styled.span`
+const DontHaveAccountText = styled.span`
   position: absolute;
   bottom: 16px;
 `
 
-export default () => {
+const Login = () => {
   return (
     <Wrapper>
       <H1>Log In</H1>
       <LoginForm />
-      <DontHaveAccount>
-        {"Don't have an account?"}
+      <DontHaveAccountText>
+        Don't have an account?
         <Link to='../signup' style={{ fontSize: '16px' }}>
           Sign up here
         </Link>
-      </DontHaveAccount>
+      </DontHaveAccountText>
     </Wrapper>
-  );
+  )
 }
+
+export default Login;
