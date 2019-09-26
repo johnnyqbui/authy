@@ -16,7 +16,10 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/],
-        use: ['babel-loader', 'es-loader'],
+        use: [
+          'babel-loader',
+          'es-loader'
+        ],
       },
       {
         // Preprocess 3rd party .css files located in node_modules

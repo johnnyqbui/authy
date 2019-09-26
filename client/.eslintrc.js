@@ -27,6 +27,7 @@ module.exports = {
     "react-hooks"
   ],
   'rules': {
+    "no-console": 1,
     // Never put spaces in opening/closing brackets of arrays
     'array-bracket-spacing': [
       2, 'never'
@@ -160,7 +161,8 @@ module.exports = {
     'quotes': [
       2, 'single',
       {
-        'avoidEscape': true, 'allowTemplateLiterals': true
+        'avoidEscape': true,
+        'allowTemplateLiterals': true
       }
     ],
     // Enforces `key` prop on iterable React elements
@@ -189,6 +191,7 @@ module.exports = {
     'react/no-did-update-set-state': 2,
     // Cannot mutate state without calling setState
     'react/no-direct-mutation-state': 2,
+    'react/no-unescaped-entities': 0,
     'react/no-is-mounted': 2,
     'react/no-unknown-property': 2,
     // Requires props to be mentioned in propTypes

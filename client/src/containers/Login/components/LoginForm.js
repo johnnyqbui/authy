@@ -26,7 +26,7 @@ export const LoginForm = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('submit', values)
+    console.warn('submit', values)
     // Log user in
 
     try {
