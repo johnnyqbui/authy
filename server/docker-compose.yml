@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  authy-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/authy/server
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./:/usr/src/authy/server
+

@@ -4,9 +4,11 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import db from './db/db';
+import knex from 'knex';
+// import db from './db/db';
+import bycrpt from 'bcrypt';
 
-const hostname = 'localhost';
+const hostname = '0.0.0.0';
 const port = 3001;
 const app = express()
 const server = http.createServer(app);
@@ -37,16 +39,63 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   }
 // })
 
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    user: 'johnny',
+    password: '',
+    database: 'authy'
+  }
+})
+
 app.get('/', (req, res) => {
-  res.status(200).send(`hello, if you're here, Your access has been granted`)
+  console.log('test')
+  res.status(200).send(db.users)
 });
 
+app.post('/signup', (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email || !password) {
+    return res.status(400).send('Incorrect Form Submission')
+  }
+
+  const hash = bcr
+  db.transaction(trx => {
+    trx.insert({
+      hash,
+      email
+    })
+      .into('login')
+      .returning('email')
+      .then(loginEmail => {
+        return trx('users')
+          .returning('*')
+          .insert({
+            email: loginEmail[0],
+            username,
+            joined: new Date()
+          })
+          .then(user => res.json(user[0]))
+      })
+      .then(trx.commit)
+      .catch(trx.rollback)
+  }).catch(err => res.status(400).json('unable to sign up'))
+})
+
 app.post('/login', (req, res) => {
-  console.log(res)
-  // console.log(req)
-  res.status(200).send({
-    message: `hello, if you're here, Your access has been granted`
-  })
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).send('Incorrect Form Submission')
+  }
+
+  db.select('email', 'hash').from('login')
+    .where('email', '=', email)
+    .then(data => {
+      return data
+    })
 });
 
 server.listen(port, () => {
