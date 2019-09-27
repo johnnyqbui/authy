@@ -8,7 +8,7 @@ const formInitialState = {
   password: '',
 }
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const [values, setValue] = useState(formInitialState)
 
   const { username, password } = values
@@ -21,7 +21,7 @@ export const LoginForm = () => {
     }
 
     setValue(newValue)
-  }
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
@@ -67,3 +67,5 @@ export const LoginForm = () => {
     </Form>
   )
 }
+
+export default LoginForm

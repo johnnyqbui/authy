@@ -16,10 +16,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/],
-        use: [
-          'babel-loader',
-          'es-loader'
-        ],
+        use: ['babel-loader'],
       },
       {
         // Preprocess 3rd party .css files located in node_modules
@@ -34,6 +31,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devServer: {
+    host: '0.0.0.0',
     port: 3000,
     publicPath: '/',
     historyApiFallback: { index: '/' },
@@ -50,7 +48,7 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          test: /[\\\/]node_modules[\\\/]/,
+          test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
           chunks: 'all'
         }

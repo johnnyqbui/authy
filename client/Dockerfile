@@ -1,6 +1,6 @@
 FROM node:10.16.0
 
-WORKDIR /usr/src/r3-boilerplate
+WORKDIR /usr/src/authy/client
 COPY ./ ./
 RUN npm install
 
