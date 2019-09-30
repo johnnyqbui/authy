@@ -88,11 +88,14 @@ app.post('/signup', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
+  console.log(req.body)
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).send('Incorrect Form Submission')
   }
+
+  console.log('logging in')
 
   db.select('email', 'hash').from('login')
     .where('email', '=', email)

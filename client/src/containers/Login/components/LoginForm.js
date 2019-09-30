@@ -4,14 +4,14 @@ import SubmitButton from 'components/Form/SubmitButton'
 import axios from 'axios'
 
 const formInitialState = {
-  username: '',
+  email: '',
   password: '',
 }
 
 const LoginForm = () => {
   const [values, setValue] = useState(formInitialState)
 
-  const { username, password } = values
+  const { email, password } = values
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -27,8 +27,7 @@ const LoginForm = () => {
     e.preventDefault()
 
     console.warn('submit', values)
-    // Log user in
-
+    const { email, password } = values
     try {
       const results = await fetch('http://localhost:3001/login', {
         method: 'POST',
@@ -36,11 +35,12 @@ const LoginForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          userInput: values
+          email,
+          password
         })
       })
-      const { data } = results
-      console.log({ results, data })
+      const { body } = results
+      console.log({ results, body })
 
     } catch {
       return console.error(e)
@@ -50,10 +50,10 @@ const LoginForm = () => {
   return (
     <Form>
       <Field
-        name='username'
-        placeholder='Username'
+        name='email'
+        placeholder='email'
         type='text'
-        value={username}
+        value={email}
         onChange={handleInputChange}
       />
       <Field

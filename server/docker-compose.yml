@@ -9,12 +9,11 @@ services:
     working_dir: /usr/src/authy/server
     environment:
       POSTGRES_URI: postgres://johnny:secret@postgres:5432/authy-db
-    links:
-      - postgres
     ports:
       - "3001:3001"
     volumes:
       - ./:/usr/src/authy/server
+      - /usr/src/authy/server/node_modules/
 
   # Postgres DB
   postgres:
@@ -23,7 +22,7 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: authy-db
       POSTGRES_HOST: postgres
-    image: ./postgres
+    build: ./postgres
     ports:
       - "5432:5432"
 
