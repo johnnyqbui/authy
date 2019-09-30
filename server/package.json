@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node app.js"
+    "start": "nodemon --exec babel-node server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/node": "^7.6.1",
-    "@babel/preset-env": "^7.6.0",
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
     "nodemon": "^1.19.2"
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "cors": "^2.8.5",
     "eslint": "^6.4.0",
     "express": "^4.17.1",
-    "helmet": "^3.21.0",
+    "helmet": "^3.21.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.4",
     "morgan": "^1.9.1",

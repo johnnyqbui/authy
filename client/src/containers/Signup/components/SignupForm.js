@@ -8,12 +8,12 @@ const formInitialState = {
   email: ''
 }
 
-export default () => {
+const SignupForm = () => {
   const [values, setValue] = useState(formInitialState)
-  const { username, password, email } = values;
+  const { username, password, email } = values
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     const newValue = {
       ...values,
       [name]: value
@@ -22,10 +22,29 @@ export default () => {
     setValue(newValue)
   }
 
-  const handleFormSubmit = (e) => {
-    console.log('submit', values)
-
+  const handleFormSubmit = async (e) => {
     e.preventDefault()
+    console.log('submit', values)
+    const { username, password, email } = values
+
+    try {
+      const results = await fetch('http://localhost:3001/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email
+        })
+      })
+      const { body } = results
+      console.log({ results, body })
+
+    } catch {
+      return console.error(e)
+    }
   }
 
   return (
@@ -53,5 +72,7 @@ export default () => {
       />
       <SubmitButton onClick={handleFormSubmit} />
     </Form>
-  );
+  )
 }
+
+export default SignupForm

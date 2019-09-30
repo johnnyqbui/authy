@@ -21,7 +21,7 @@ const LoginForm = () => {
     }
 
     setValue(newValue)
-  };
+  }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()

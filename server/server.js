@@ -6,12 +6,17 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import knex from 'knex';
 // import db from './db/db';
-import bycrpt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const hostname = '0.0.0.0';
 const port = 3001;
 const app = express()
 const server = http.createServer(app);
+
+const db = knex({
+  client: 'pg',
+  connection: process.env.POSTGRES_URI
+})
 
 // secure headers
 app.use(helmet())
@@ -39,49 +44,47 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   }
 // })
 
-const db = knex({
-  client: 'pg',
-  connection: {
-    host: '127.0.0.1',
-    user: 'johnny',
-    password: '',
-    database: 'authy'
-  }
-})
-
 app.get('/', (req, res) => {
   console.log('test')
   res.status(200).send(db.users)
 });
 
 app.post('/signup', (req, res) => {
+  console.log(req.body)
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
     return res.status(400).send('Incorrect Form Submission')
   }
 
-  const hash = bcr
-  db.transaction(trx => {
-    trx.insert({
-      hash,
-      email
-    })
-      .into('login')
-      .returning('email')
-      .then(loginEmail => {
-        return trx('users')
-          .returning('*')
-          .insert({
-            email: loginEmail[0],
-            username,
-            joined: new Date()
-          })
-          .then(user => res.json(user[0]))
+  const hash = bcrypt.hash(10, () => {
+    console.log('hashing pw')
+
+    db.transaction(trx => {
+      trx.insert({
+        hash,
+        email
       })
-      .then(trx.commit)
-      .catch(trx.rollback)
-  }).catch(err => res.status(400).json('unable to sign up'))
+        .into('signup')
+        .returning('email')
+        .then(signupEmail => {
+          // also insert into users table
+          return trx('users')
+            .returning('*')
+            .insert({
+              email: signupEmail[0],
+              username,
+              joined: new Date()
+            })
+            .then(user => res.json(user[0]))
+        })
+        .then(trx.commit)
+        .catch(trx.rollback)
+    }).catch(err => {
+      console.log({ err })
+      res.status(400).send('unable to sign up')
+    })
+  })
 })
 
 app.post('/login', (req, res) => {
